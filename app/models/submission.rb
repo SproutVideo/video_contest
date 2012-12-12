@@ -13,7 +13,7 @@ class Submission < ActiveRecord::Base
     resp = Sproutvideo::Video.create(video.path,{
       :title => title,
       :description => description,
-      :notification_url => "http://142.255.78.240:3000/submissions/#{uid}/notify",
+      :notification_url => "http://ec2-23-21-158-155.compute-1.amazonaws.com//submissions/#{uid}/notify",
       :tags => '7a97d7b7f5'
       }).body
     if !!resp[:error]
