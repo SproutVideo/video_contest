@@ -9,7 +9,7 @@ gem 'mysql2'
 
 gem 'json'
 
-gem "paperclip", "~> 3.0"
+gem 'paperclip', '~> 3.1.4'
 gem 'delayed_job_active_record'
 gem 'sproutvideo-rb', :require => 'sproutvideo'
 gem 'haml'
