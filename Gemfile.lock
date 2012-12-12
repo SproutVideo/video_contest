@@ -67,6 +67,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.5)
+    kgio (2.7.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -140,6 +141,9 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    unicorn (3.6.2)
+      kgio (~> 2.3)
+      rack
 
 PLATFORMS
   ruby
@@ -161,3 +165,4 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sproutvideo-rb
   uglifier (>= 1.0.3)
+  unicorn

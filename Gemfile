@@ -14,6 +14,7 @@ gem 'delayed_job_active_record'
 gem 'sproutvideo-rb', :require => 'sproutvideo'
 gem 'haml'
 gem 'sass'
+gem 'unicorn'
 
 # Gems used only for assets and not required
 # in production environments by default.
