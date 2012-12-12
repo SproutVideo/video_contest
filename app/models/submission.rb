@@ -7,9 +7,20 @@ class Submission < ActiveRecord::Base
   after_create :set_uid
   has_many :votes
 
+  def create_short_url
+    resp = RestClient.get(
+      'https://api-ssl.bitly.com/v3/shorten',
+      :params => {
+        :login => BITLY_USERNAME,
+        :apiKey => BITLY_API_KEY,
+        :longUrl => "http://resolutions.sproutvideo.com/submissions/#{uid}"})
+    url = JSON.parse(resp.to_s)["data"]["url"]
+    update_attribute(:short_url, url)
+  end
 
   def send_to_sproutvideo
     return if !sproutvideo_id.nil?
+    create_short_url
     resp = Sproutvideo::Video.create(video.path.to_s,{
       :title => title,
       :description => description,

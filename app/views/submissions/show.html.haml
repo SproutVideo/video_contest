@@ -1,3 +1,5 @@
+-content_for :title do
+	=@submission.title
 .page-header
 	%h1= @submission.title
 .row
@@ -33,21 +35,43 @@
 				%meta{:property => "og:description", :content => "#{@submission.description}"}
 				%meta{:property => "og:site_name", :content=>"SproutVideo"}
 				%meta{:property => "fb:admins", :content => "3401385"}
-
-			.video-wrapper{:style=>"padding-top: #{(@submission.sproutvideo_height.to_f/@submission.sproutvideo_width)*100.0}%"}
-				%iframe{:src => "http://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=hd", :frameborder => 0, :width => '100%', :height => '100%'}
-			.lead= @submission.description
-			-unless @voted_today
-				.vote_form
-					=form_for @vote, :remote => true do |f|
-						=f.hidden_field :submission_id, :value => @submission.id
-						=f.submit 'Vote for this submission!', :class => 'btn btn-large btn-success'
-				.vote_success{:style => 'display:none;'}
-					Thanks for voting!
-			- else
-				Thanks for voting today. Check back tomorrow to vote again!
+			.thumbnail{:style => 'background-color: #FFF'}
+				.video-wrapper{:style=>"padding-top: #{(@submission.sproutvideo_height.to_f/@submission.sproutvideo_width)*100.0}%"}
+					%iframe{:src => "http://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=hd", :frameborder => 0, :width => '100%', :height => '100%'}
+				%p
+					.lead= @submission.description
+				%center
+					-unless @voted_today
+						.vote_form
+							=form_for @vote, :remote => true do |f|
+								=f.hidden_field :submission_id, :value => @submission.id
+								=f.submit 'Vote for this submission!', :class => 'btn btn-large btn-success'
+						.vote_success{:style => 'display:none;'}
+							%p
+								%button.btn.btn-large.btn-success.disabled{:disabled => true}
+									Thanks for voting!
+					- else
+						%p Thanks for voting today. Check back tomorrow to vote again!
+			%hr
 			.share
-				%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"I just voted for #{@submission.title} to win a free year of SproutVideo. You should too! #SproutResolutions", :"data-url" =>"#{FIREFLY.shorten(submission_url(@submission))}"}Tweet
+				.well
+					%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"I just voted for #{@submission.title} to win a free year of SproutVideo. You should too! #SproutResolutions", :"data-url" =>"#{@submission.short_url}"}Tweet
+					:javascript
+						!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+					.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
+			%hr
+			.comments
+				#disqus_thread
 				:javascript
-					!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-				.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
+					var disqus_shortname = 'sproutvideoresolutions';
+					(function() {
+						var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+						(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+					})();
+				%noscript
+					Please enable JavaScript to view the 
+					%a(href="http://disqus.com/?ref_noscript")comments powered by Disqus.
+				%a(href="http://disqus.com" class="dsq-brlink")
+					comments powered by
+					%span.logo-disqus Disqus

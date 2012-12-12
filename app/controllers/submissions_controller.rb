@@ -1,6 +1,10 @@
 class SubmissionsController < ApplicationController
   def index
-    @submissions = Submission.find_all_by_video_state('deployed', :limit => 4)
+    if params[:page]
+      @submissions = Submission.where('video_state = "deployed"').page(params[:page])
+    else
+      @submissions = Submission.where('video_state = "deployed"').limit(4)
+    end
   end
 
   def show
@@ -15,6 +19,10 @@ class SubmissionsController < ApplicationController
 
   def new
     @submission = Submission.new
+  end
+  
+  def leader_board
+    @submissions = Submission.all(:include => :votes, :order => 'count(votes.submission_id) DESC', :limit => 25)
   end
 
   def notify

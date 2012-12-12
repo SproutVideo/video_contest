@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212011005) do
+ActiveRecord::Schema.define(:version => 20121212171732) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20121212011005) do
     t.string   "user_agent"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
+    t.string   "short_url"
   end
 
   add_index "submissions", ["uid"], :name => "index_submissions_on_uid"

@@ -1,0 +1,18 @@
+.page-header
+	%h1 Leader Board
+.row
+	.span12
+		.lead Here are the current standings.
+		-count = 0		
+
+		%ul.thumbnails
+			-@submissions.each do |submission|
+				-count+=1
+				%li.span4
+					.thumbnail{:style => 'background-color: #FFF'}
+						%a{:href => submission_url(submission), :class => 'thumbnail'}
+							%span.play
+							=image_tag(submission.sproutvideo_poster_frame_url)
+						%h3 ##{count}. #{link_to(submission.title, submission_url(submission))}
+						%p= truncate(submission.description, :length => 250)
+						%p= pluralize(submission.votes.count, 'vote')
