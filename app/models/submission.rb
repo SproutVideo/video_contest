@@ -10,7 +10,7 @@ class Submission < ActiveRecord::Base
 
   def send_to_sproutvideo
     return if !sproutvideo_id.nil?
-    resp = Sproutvideo::Video.create(video.path,{
+    resp = Sproutvideo::Video.create(video.path.to_s,{
       :title => title,
       :description => description,
       :notification_url => "http://ec2-23-21-158-155.compute-1.amazonaws.com//submissions/#{uid}/notify",
