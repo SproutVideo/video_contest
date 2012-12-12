@@ -1,0 +1,23 @@
+= form_for(@submission, :html => {:multipart => true}) do |f|
+  %fieldset
+    %legend Submit your New Years Video Resolution!
+    -if @submission.errors.any?
+      #error_explanation
+        %h2 #{pluralize(@submission.errors.count, "error")} prohibited this submission from being saved:
+        %ul
+          - @submission.errors.full_messages.each do |msg|
+            %li= msg
+    %label Email Address:
+    = f.text_field :email
+    .help-block So we know who to contact if you win!
+    %label Title:
+    = f.text_field :title
+    .help-block Give your submission a short title.
+    %label Description:
+    = f.text_area :description, :rows => 3
+    .help-block Tell us a little bit more about your submission.
+    %label Video:
+    = f.file_field :video
+    .help-block Your actual video submission.
+    .form-actions
+      =f.submit :class => 'btn btn-primary'

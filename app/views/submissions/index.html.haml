@@ -1,0 +1,15 @@
+.row-fluid
+  .span-12
+    .hero-unit
+      %h1 Ring in the New Year!
+      %p Submit your New Year Video Resolution for a chance to with a free SproutVideo subscription for a year!
+      %p=link_to('Submit Yours Now!', new_submission_path, :class => 'btn btn-primary btn-large')
+.row-fluid
+  .span12
+    %h4 Recent Submissions
+    %ul.thumbnails
+      -@submissions.each do |submission|
+        %li.span4
+          %a.thumbnail{:href => submission_path(submission)}
+            %span.play
+            =image_tag(submission.sproutvideo_poster_frame_url)

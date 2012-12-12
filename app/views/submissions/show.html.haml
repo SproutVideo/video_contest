@@ -1,0 +1,53 @@
+.page-header
+	%h1= @submission.title
+.row
+	.span12
+		- if @submission.video_state != "deployed"
+			.alert.alert-success.alert-block
+				.lead Thank you for submitting your entry! Your video is being processed. This should only take a few moments.
+				%p
+					%b.state Transferring your video to SproutVideo...
+				.row
+					.span10
+						.progress.progress-striped.active.progress-warning
+							.bar{:style=>"width: 100%;"}
+					.span1 
+						%b.percent
+						
+			:javascript
+				Application.pollForProgress("#{@submission.uid}")
+		- else
+			- content_for :facebook_js do
+				#fb-root
+				:javascript
+					(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=153473816914";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+			- content_for :open_graph do
+				%meta{:property => "og:title", :content => @submission.title}
+				%meta{:property => "og:type", :content => "article"}
+				%meta{:property => "og:url", :content => submission_url(@submission)}
+				%meta{:property => "og:image", :content => @submission.sproutvideo_poster_frame_url}
+				%meta{:property => "og:video:height", :content => "#{@submission.sproutvideo_height}"}
+				%meta{:property => "og:video:width", :content => "#{@submission.sproutvideo_width}"}
+				%meta{:property => "og:video:type", :content => "application/x-shockwave-flash"}
+				%meta{:property => "og:video", :content => "https://d3nt7egy5kvcte.cloudfront.net/MediaPlayer.swf?id=#{@submission.sproutvideo_id}&st=#{@submission.sproutvideo_security_token}&autoplay=true&facebook=true"}
+				%meta{:property => "og:description", :content => "#{@submission.description}"}
+				%meta{:property => "og:site_name", :content=>"SproutVideo"}
+				%meta{:property => "fb:admins", :content => "3401385"}
+
+			.video-wrapper{:style=>"padding-top: #{(@submission.sproutvideo_height.to_f/@submission.sproutvideo_width)*100.0}%"}
+				%iframe{:src => "http://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=hd", :frameborder => 0, :width => '100%', :height => '100%'}
+			.lead= @submission.description
+			-unless @voted_today
+				.vote_form
+					=form_for @vote, :remote => true do |f|
+						=f.hidden_field :submission_id, :value => @submission.id
+						=f.submit 'Vote for this submission!', :class => 'btn btn-large btn-success'
+				.vote_success{:style => 'display:none;'}
+					Thanks for voting!
+			- else
+				Thanks for voting today. Check back tomorrow to vote again!
+			.share
+				%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"I just voted for #{@submission.title} to win a free year of SproutVideo. You should too! #SproutResolutions", :"data-url" =>"#{FIREFLY.shorten(submission_url(@submission))}"}Tweet
+				:javascript
+					!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+				.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}

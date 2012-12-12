@@ -1,0 +1,18 @@
+!!! 5
+%html{:lang => "en"}
+	%head
+		%meta{:charset=>"utf-8"}
+		%title VideoContest
+		= stylesheet_link_tag "application", :media => "all"
+		= javascript_include_tag "application"
+		= csrf_meta_tags
+		= yield :open_graph
+%body
+	= yield :facebook_js
+	#wrap
+		.container
+			= yield
+			.row.footer
+				.span12
+					.pull-right
+						=link_to(image_tag('powered_by_sproutvideo.png', :alt => 'Video hosting powered by SproutVideo.com'), 'http://sproutvideo.com/?utm_source=contest_mini_site&utm_medium=powered_by_button&utm_campaign=new_years_resolution_contest')
