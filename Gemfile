@@ -11,7 +11,7 @@ gem 'json'
 
 gem 'paperclip', '~> 3.1.4'
 gem 'delayed_job_active_record'
-gem 'sproutvideo-rb', '~> 1.1.1', :require => 'sproutvideo'
+gem 'sproutvideo-rb', :require => 'sproutvideo' , :git => 'git://github.com/SproutVideo/sproutvideo-rb.git'
 gem 'haml'
 gem 'sass'
 gem 'unicorn'
