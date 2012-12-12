@@ -37,12 +37,17 @@ class SubmissionsController < ApplicationController
   def create 
     params[:submission][:ip_address] = request.remote_ip
     params[:submission][:user_agent] = request.user_agent 
+
     @submission = Submission.new(params[:submission])
-    if @submission.save
-      @submission.delay.send_to_sproutvideo
-      redirect_to @submission
-    else
-        render action: "new"
+    respond_to do |format|
+      if @submission.save
+        @submission.delay.send_to_sproutvideo
+        format.html { redirect_to @submission }
+        format.json { render json: {:submission_url => "/submissions/#{@submission.uid}"} }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @submission.errors, status: :unprocessable_entity }
+      end
     end
   end
 

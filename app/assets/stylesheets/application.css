@@ -48,3 +48,66 @@ a.thumbnail span.play {
     width: 55px; }
     a.thumbnail:hover span.play {
     background: url(/assets/thumbnail_play.png) no-repeat 0 -42px; }
+
+    .drop-target {
+  padding-top: 50px;
+  padding-bottom: 50px; 
+text-align: center;}
+
+.drag-over {
+  background-color: #cccccc;
+  color: white; }
+
+.drop-text {
+  border: 1px dotted #cccccc;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  text-align: center;
+  padding: 10px;
+  color: #999999;
+  margin-top: 10px; }
+
+.upload-button-box {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  overflow: hidden; }
+  .upload-button-box .input-box {
+    overflow: hidden;
+    width: 294px;}
+    .upload-button-box .input-box input {
+      opacity: 0;
+      position: absolute;
+      right: 0px;
+      top: 0px; }
+.overall-progress {
+  margin-bottom: 15px; }
+
+.info {
+  overflow: hidden;
+  margin-bottom: 10px; }
+  .info div {
+    text-shadow: 1px 1px 1px #cccccc;
+    text-align: center;
+    float: left;
+    width: 150px;
+    padding: 20px 10px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
+    .info div h3 {
+      font-size: 1.5em;
+      text-transform: none; }
+    .info div span {
+      margin: 0;
+      padding: 0; }
+
+.speed {
+  margin-right: 25px; }
+
+.time-left {
+  margin-right: 25px; }

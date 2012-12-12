@@ -2,29 +2,60 @@
     %h1 Submit your New Years Video Resolution!
 
 .row{:style => 'background-color: #FFF'}
-    .span8
-        = form_for(@submission, :html => {:multipart => true}) do |f|
+    .span6
+        = form_for(@submission, :html => {:multipart => true, :onsubmit => 'return false;'}) do |f|
             %fieldset
-                -if @submission.errors.any?
-                    #error_explanation
-                        %h2 #{pluralize(@submission.errors.count, "error")} prohibited this submission from being saved:
-                        %ul
-                            - @submission.errors.full_messages.each do |msg|
-                                %li= msg
-                %label Email Address:
-                = f.text_field :email, :class => 'span5'
-                .help-block So we know who to contact if you win!
-                %label Title:
-                = f.text_field :title, :class => 'span5'
-                .help-block Give your submission a short title.
-                %label Description:
-                = f.text_area :description, :rows => 4, :class => 'span5'
-                .help-block Tell us a little bit more about your submission.
-                %label Select your video to upload:
-                = f.file_field :video
-                .help-block Your actual video submission.
+                .form-stuff
+                    -if @submission.errors.any?
+                        #error_explanation
+                            %h2 #{pluralize(@submission.errors.count, "error")} prohibited this submission from being saved:
+                            %ul
+                                - @submission.errors.full_messages.each do |msg|
+                                    %li= msg
+                    .control-group
+                        %label.control-label Email Address:
+                        .controls
+                            = f.text_field :email, :class => 'span5'
+                            .help-block So we know who to contact if you win!
+                    .control-group
+                        %label.control-label Title:
+                        .controls
+                            = f.text_field :title, :class => 'span5'
+                            .help-block Give your submission a short title.
+                    .control-group
+                        %label.control-label Description:
+                        .controls
+                            = f.text_area :description, :rows => 4, :class => 'span5'
+                            .help-block Tell us a little bit more about your submission.
+                    .file-info{:style => 'display:none'}
+                        .data
+                        %a.clear-video.btn.btn-danger
+                            Select a different video.
+                    .drop-target
+                        .upload-button-box
+                            %a.btn.btn-success
+                                Select A  Video From Your Computer
+                            .input-box
+                                = f.file_field :video
+                        .muted - or -
+                        .drop-text
+                            Drag and drop a videos anywhere on this page to upload it.
+                .overall-progress{:style => 'display:none'}
+                    .info
+                        .speed
+                            %h3 0
+                            %span Upload Speed
+                        .time-left
+                            %h3 00:00:00
+                            %span Time Remaining
+                        .percent-complete
+                            %h3 0.00%
+                            %span Percent Complete
+                    .progress.progress-striped.active.progress-success
+                        .bar{:style=>"width: 0%;"}
+                        
                 .form-actions
-                    =f.submit :class => 'btn btn-primary'
+                    =f.submit :class => 'btn btn-primary btn-large', :value => 'Upload Submission!'
     .span4
         %h3 General Guidelines
         %p But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
