@@ -14,7 +14,7 @@
  *= require_tree .
  */
  body {
- 	background-image: url(http://subtlepatterns.com/patterns/gplaypattern.png);
+ 	background-image: url(http://subtlepatterns.com/patterns/crisp_paper_ruffles.png);
  }
 .video-wrapper {
   width: 100%;
@@ -113,7 +113,10 @@ text-align: center;}
   margin-right: 25px; }
 /* Carousel base class */
     .carousel {
-      margin-bottom: 60px;
+     margin-bottom: 0;
+     /*-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);*/
     }
 
     .carousel .container {
@@ -137,7 +140,7 @@ text-align: center;}
     }
 
     .carousel .item {
-      height: 500px;
+      height: 544px;
     }
     .carousel img.background {
       position: absolute;

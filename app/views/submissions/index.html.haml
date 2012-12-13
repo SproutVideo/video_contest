@@ -23,10 +23,11 @@
             %h1 Ring in the New Year!
             .lead Submit your New Year Video Resolution for a chance to with a free SproutVideo subscription for a year!
             =link_to('Submit Yours Now!', new_submission_path, :class => 'btn btn-primary btn-large')
-            
-  
-.row-fluid
-  .span12
+            =link_to('What is this?', new_submission_path, :class => 'btn btn-large btn-info')
+
+
+.row-fluid{:style => '-moz-box-shadow: inset 0 1px 3px 1px #cccccc;-webkit-box-shadow: inset 0 1px 3px 1px #CCC;box-shadow: inset 0 1px 3px 1px #CCC;background-color: whiteSmoke;'}
+  .span12{:style => 'padding: 10px 15px 15px;'}
     %h4 Recent Submissions
     %ul.thumbnails
       -@submissions.each do |submission|
