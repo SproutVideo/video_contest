@@ -2,8 +2,8 @@
 	=@submission.title
 .page-header
 	%h1= @submission.title
-.row
-	.span12
+.row-fluid{:style => '-moz-box-shadow: inset 0 1px 3px 1px #cccccc;-webkit-box-shadow: inset 0 1px 3px 1px #CCC;box-shadow: inset 0 1px 3px 1px #CCC;background-color: whiteSmoke;'}
+	.span12{:style => 'padding: 10px 15px 15px;'}
 		- if @submission.video_state != "deployed"
 			.alert.alert-success.alert-block
 				.lead Thank you for submitting your entry! Your video is being processed. This should only take a few moments.
@@ -35,23 +35,23 @@
 				%meta{:property => "og:description", :content => "#{@submission.description}"}
 				%meta{:property => "og:site_name", :content=>"SproutVideo"}
 				%meta{:property => "fb:admins", :content => "3401385"}
-			.thumbnail{:style => 'background-color: #FFF'}
+			.thumbnail
 				.video-wrapper{:style=>"padding-top: #{(@submission.sproutvideo_height.to_f/@submission.sproutvideo_width)*100.0}%"}
 					%iframe{:src => "http://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=hd", :frameborder => 0, :width => '100%', :height => '100%'}
-				%p
-					.lead= @submission.description
-				%center
-					-unless @voted_today
-						.vote_form
-							=form_for @vote, :remote => true do |f|
-								=f.hidden_field :submission_id, :value => @submission.id
-								=f.submit 'Vote for this submission!', :class => 'btn btn-large btn-success'
-						.vote_success{:style => 'display:none;'}
-							%p
-								%button.btn.btn-large.btn-success.disabled{:disabled => true}
-									Thanks for voting!
-					- else
-						%p Thanks for voting today. Check back tomorrow to vote again!
+			%p
+				.lead= @submission.description
+			%center
+				-unless @voted_today
+					.vote_form
+						=form_for @vote, :remote => true do |f|
+							=f.hidden_field :submission_id, :value => @submission.id
+							=f.submit 'Vote for this submission!', :class => 'btn btn-large btn-success'
+					.vote_success{:style => 'display:none;'}
+						%p
+							%button.btn.btn-large.btn-success.disabled{:disabled => true}
+								Thanks for voting!
+				- else
+					%p Thanks for voting today. Check back tomorrow to vote again!
 			%hr
 			.share
 				.well
