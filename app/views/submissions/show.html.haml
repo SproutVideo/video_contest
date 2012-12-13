@@ -35,6 +35,10 @@
 				%meta{:property => "og:description", :content => "#{@submission.description}"}
 				%meta{:property => "og:site_name", :content=>"SproutVideo"}
 				%meta{:property => "fb:admins", :content => "3401385"}
+				%meta{:name => 'twitter:card', :content => 'player'}
+				%meta{:name => 'twitter:player', :content => "https://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=sd"}
+				%meta{:name => 'twitter:player:width', :content => @submission.sproutvideo_width}
+				%meta{:name => 'twitter:player:height', :content => @submission.sproutvideo_height}
 			.thumbnail
 				.video-wrapper{:style=>"padding-top: #{(@submission.sproutvideo_height.to_f/@submission.sproutvideo_width)*100.0}%"}
 					%iframe{:src => "http://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=hd", :frameborder => 0, :width => '100%', :height => '100%'}
