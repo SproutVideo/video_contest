@@ -82,7 +82,6 @@ jQuery(document).ready(function($) {
         dataType: 'json',
         add: false,
     }).bind('fileuploadadd', function (e, data) {
-        console.log(e, data)
         data.files.valid = data.isValidated = validate(data.files);
         files.push(data);
         var file = data.files[0];
@@ -133,15 +132,12 @@ jQuery(document).ready(function($) {
     .bind('fileuploadalways', function (e, data) {
     })
     .bind('fileuploadprogress', function (e, data) {
-		console.log(e,data);
     })
     .bind('fileuploadprogressall', function (e, data) {
-    	console.log(e, data);
         var progress = parseInt(data.loaded / data.total * 100, 10);
         $('.overall-progress .progress .bar').css('width', progress + "%")
         $('.overall-progress .info .speed h3').text(formatBitRate(data.bitrate));
         var timeLeft = (data.total-data.loaded)/data.bitrate;
-        console.log(timeLeft);
         $('.overall-progress .info .time-left h3').text(formatTime(timeLeft));
         $('.overall-progress .info .percent-complete h3').text(((data.loaded/data.total)*100).toFixed(2) + "%");
     })

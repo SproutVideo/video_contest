@@ -11,21 +11,33 @@
             =image_tag(submission.sproutvideo_poster_frame_url)
   = paginate @submissions, :remote => true
 -else
-  .row-fluid
-    .span-12
-      .hero-unit
-        %h1 Ring in the New Year!
-        %p Submit your New Year Video Resolution for a chance to with a free SproutVideo subscription for a year!
-        %p=link_to('Submit Yours Now!', new_submission_path, :class => 'btn btn-primary btn-large')
-  .row-fluid
-    .span12
-      %h4 Recent Submissions
-      %ul.thumbnails
-        -@submissions.each do |submission|
-          %li.span3
-            %a.thumbnail{:href => submission_path(submission)}
-              %span.play
-              =image_tag(submission.sproutvideo_poster_frame_url)
-      =link_to('View all submissions →', submissions_url(:page => 1))
-      %br
-      =link_to('View the leader board →', leader_board_url)
+.carousel
+  #myCarousel.carousel.slide
+    .carousel-inner
+      .item.active
+        %video(width="967" height="544" autoplay="true" loop="true" style="" src="/assets/background.webm?123123asdfas")
+        %img.background(src="/assets/background.jpg")
+        
+        .container
+          .carousel-caption
+            %h1 Ring in the New Year!
+            .lead Submit your New Year Video Resolution for a chance to with a free SproutVideo subscription for a year!
+            =link_to('Submit Yours Now!', new_submission_path, :class => 'btn btn-primary btn-large')
+            
+  
+.row-fluid
+  .span12
+    %h4 Recent Submissions
+    %ul.thumbnails
+      -@submissions.each do |submission|
+        %li.span3
+          %a.thumbnail{:href => submission_path(submission)}
+            %span.play
+            =image_tag(submission.sproutvideo_poster_frame_url)
+    =link_to('View all submissions →', submissions_url(:page => 1))
+    %br
+    =link_to('View the leader board →', leader_board_url)
+
+:javascript
+  if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1)
+    $('img.background').attr('src', '/assets/background-safari.jpg')
