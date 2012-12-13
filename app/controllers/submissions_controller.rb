@@ -1,9 +1,9 @@
 class SubmissionsController < ApplicationController
   def index
     if params[:page]
-      @submissions = Submission.where('video_state = "deployed"').page(params[:page])
+      @submissions = Submission.where('video_state = "deployed"').order('id DESC').page(params[:page])
     else
-      @submissions = Submission.where('video_state = "deployed"').limit(4)
+      @submissions = Submission.where('video_state = "deployed"').order('id DESC').limit(4)
     end
   end
 
