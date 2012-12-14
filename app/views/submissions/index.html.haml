@@ -15,7 +15,9 @@
     #myCarousel.carousel.slide
       .carousel-inner
         .item.active
-          %video(width="967" height="544" autoplay="true" loop="true" style="" src="/assets/background.webm?123123asdfas")
+          %video(width="967" height="544" autoplay="true" loop="true" style="")
+            %source(src="/assets/background.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"')
+            %source(src="/assets/background.webm" type='video/webm; codecs="vp8, vorbis"')
           %img.background(src="/assets/background.jpg")
           
           .container
