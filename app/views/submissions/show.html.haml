@@ -1,10 +1,17 @@
 -content_for :title do
 	=@submission.title
-.page-header
-	%h1= @submission.title
-.row-fluid{:style => '-moz-box-shadow: inset 0 1px 3px 1px #cccccc;-webkit-box-shadow: inset 0 1px 3px 1px #CCC;box-shadow: inset 0 1px 3px 1px #CCC;background-color: whiteSmoke;'}
-	.span12{:style => 'padding: 10px 15px 15px;'}
-		- if @submission.video_state != "deployed"
+.row
+	.span12
+		.header-text{:style=>'font-size:38px;line-height:30px'}
+			= @submission.title
+			%br
+			%span.sub
+				by
+				= @submission.email
+		%br
+.row
+	.span8
+		-if @submission.video_state != "deployed"
 			.alert.alert-success.alert-block
 				.lead Thank you for submitting your entry! Your video is being processed. This should only take a few moments.
 				%p
@@ -39,31 +46,19 @@
 				%meta{:name => 'twitter:player', :content => "https://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=sd"}
 				%meta{:name => 'twitter:player:width', :content => @submission.sproutvideo_width}
 				%meta{:name => 'twitter:player:height', :content => @submission.sproutvideo_height}
-			.thumbnail
-				.video-wrapper{:style=>"padding-top: #{(@submission.sproutvideo_height.to_f/@submission.sproutvideo_width)*100.0}%"}
-					%iframe{:src => "http://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}?type=hd", :frameborder => 0, :width => '100%', :height => '100%'}
-			%p
-				.lead= @submission.description
-			%center
-				-unless @voted_today
-					.vote_form
-						=form_for @vote, :remote => true do |f|
-							=f.hidden_field :submission_id, :value => @submission.id
-							=f.submit 'Vote for this submission!', :class => 'btn btn-large btn-success'
-					.vote_success{:style => 'display:none;'}
-						%p
-							%button.btn.btn-large.btn-success.disabled{:disabled => true}
-								Thanks for voting!
-				- else
-					%p Thanks for voting today. Check back tomorrow to vote again!
-			%hr
+			
+			.video-wrapper{:style=>"padding-top: #{(@submission.sproutvideo_height.to_f/@submission.sproutvideo_width)*100.0}%"}
+				%iframe{:src => "http://videos.sproutvideo.com/embed/#{@submission.sproutvideo_id}/#{@submission.sproutvideo_security_token}", :frameborder => 0, :width => '100%', :height => '100%'}
+
+			.header-bar
+				%span Sharing
 			.share
-				.well
-					%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"I just voted for #{@submission.title} to win a free year of SproutVideo. You should too! #SproutResolutions", :"data-url" =>"#{@submission.short_url}"}Tweet
-					:javascript
-						!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-					.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
-			%hr
+				%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"I just voted for #{@submission.title} to win a free year of SproutVideo. You should too! #SproutResolutions", :"data-url" =>"#{@submission.short_url}"}Tweet
+				:javascript
+					!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+				.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
+			.header-bar
+				%span Comments
 			.comments
 				#disqus_thread
 				:javascript
@@ -79,3 +74,29 @@
 				%a(href="http://disqus.com" class="dsq-brlink")
 					comments powered by
 					%span.logo-disqus Disqus
+
+	.span4
+		.video-details
+			.score
+				.place
+					10
+					%sup th
+					.small
+						place
+				.votes
+					25
+					.small
+						votes
+			-unless @voted_today
+				.vote_form
+					=form_for @vote, :remote => true do |f|
+						=f.hidden_field :submission_id, :value => @submission.id
+						=f.submit 'Vote for this submission!', :class => 'vote-btn'
+				.vote_success{:style => 'display:none;'}
+					%button.vote-btn{:disabled => true}
+						Thanks for voting!
+			- else
+				%p Thanks for voting today. Check back tomorrow to vote again!
+			%hr
+			%p= @submission.description
+	

@@ -1,8 +1,10 @@
-.page-header
-    %h1 Submit your New Years Video Resolution!
+.row
+    .span12
+        .header-text Submit your New Years Video Resolution!
+        %br
 
-.row{:style => 'background-color: #FFF'}
-    .span6
+.row
+    .span8
         = form_for(@submission, :html => {:multipart => true, :onsubmit => 'return false;'}) do |f|
             %fieldset
                 .form-stuff
@@ -15,17 +17,17 @@
                     .control-group
                         %label.control-label Email Address:
                         .controls
-                            = f.text_field :email, :class => 'span5'
+                            = f.text_field :email, :class => 'span8'
                             .help-block So we know who to contact if you win!
                     .control-group
                         %label.control-label Title:
                         .controls
-                            = f.text_field :title, :class => 'span5'
+                            = f.text_field :title, :class => 'span8'
                             .help-block Give your submission a short title.
                     .control-group
                         %label.control-label Description:
                         .controls
-                            = f.text_area :description, :rows => 4, :class => 'span5'
+                            = f.text_area :description, :rows => 4, :class => 'span8'
                             .help-block Tell us a little bit more about your submission.
                     .file-info{:style => 'display:none'}
                         .data
@@ -33,13 +35,15 @@
                             Select a different video.
                     .drop-target
                         .upload-button-box
-                            %a.btn.btn-success
+                            %a.vote-btn
                                 Select A  Video From Your Computer
                             .input-box
                                 = f.file_field :video
                         .muted - or -
                         .drop-text
-                            Drag and drop a videos anywhere on this page to upload it.
+                            Drag and drop a video
+                            %br
+                            anywhere on this page to upload it.
                 .overall-progress{:style => 'display:none'}
                     .info
                         .speed
@@ -54,8 +58,10 @@
                     .progress.progress-striped.active.progress-success
                         .bar{:style=>"width: 0%;"}
                         
-                .form-actions
-                    =f.submit :class => 'btn btn-primary btn-large', :value => 'Upload Submission!'
+                .form-actions{:style => 'text-align: center'}
+                    =f.submit :class => 'submit-btn', :value => 'Upload Submission!'
     .span4
-        %h3 General Guidelines
-        %p But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+        .video-details
+            .header-text General Guidelines
+            %br
+            %p But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"

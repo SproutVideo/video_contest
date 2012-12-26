@@ -4,6 +4,10 @@ class SubmissionsController < ApplicationController
       @submissions = Submission.where('video_state = "deployed"').order('id DESC').page(params[:page])
     else
       @submissions = Submission.where('video_state = "deployed"').order('id DESC').limit(4)
+      votes = Vote.count(:group => 'submission_id').sort{|a,b| b[1]<=>a[1]}.collect{|ids|ids[0]}
+      @leaders = []
+      votes[0..5].each{|submission_id| @leaders << Submission.find(submission_id)}
+      
     end
   end
 
@@ -22,7 +26,9 @@ class SubmissionsController < ApplicationController
   end
   
   def leader_board
-    @submissions = Submission.all(:include => :votes, :order => 'count(votes.submission_id) DESC', :limit => 25)
+    votes = Vote.count(:group => 'submission_id').sort{|a,b| b[1]<=>a[1]}.collect{|ids|ids[0]}
+    @leaders = []
+    votes[0..19].each{|submission_id| @leaders << Submission.find(submission_id)}
   end
 
   def notify

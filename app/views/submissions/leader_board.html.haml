@@ -1,18 +1,37 @@
-.page-header
-	%h1 Leader Board
 .row
 	.span12
-		.lead Here are the current standings.
-		-count = 0		
-
-		%ul.thumbnails
-			-@submissions.each do |submission|
-				-count+=1
-				%li.span4
-					.thumbnail{:style => 'background-color: #FFF'}
-						%a{:href => submission_url(submission), :class => 'thumbnail'}
-							%span.play
-							=image_tag(submission.sproutvideo_poster_frame_url)
-						%h3 ##{count}. #{link_to(submission.title, submission_url(submission))}
-						%p= truncate(submission.description, :length => 250)
-						%p= pluralize(submission.votes.count, 'vote')
+		.header-text
+			Leaderboard
+			%br
+			%span.sub These are the companies in the running to win!
+		%ul.leaderboard{:style => 'width: 49%; float: left; margin-right: 10px'}
+			-i = 0
+			-@leaders[0..9].each do |leader|
+				-i+=1
+				%li.leader
+					.position{:class => "position-#{i}"}
+						.txt=i
+					.details
+						.company= leader.email
+						.title= leader.title
+					.votes
+						.count
+							= number_with_delimiter leader.votes.count
+							.small= leader.votes.count == 1 ? "VOTE" : "VOTES"
+						=link_to(image_tag('leader.png'),submission_path(leader))
+		-if @leaders.count > 10
+			%ul.leaderboard{:style => 'width: 49%; float: left;'}
+				-i = 10
+				-@leaders[10..19].each do |leader|
+					-i+=1
+					%li.leader
+						.position{:class => "position-#{i}"}
+							.txt=i
+						.details
+							.company= leader.email
+							.title= leader.title
+						.votes
+							.count
+								= number_with_delimiter leader.votes.count
+								.small= leader.votes.count == 1 ? "VOTE" : "VOTES"
+							=link_to(image_tag('leader.png'),submission_path(leader))

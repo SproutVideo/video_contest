@@ -9,7 +9,7 @@
 				\|
 			SproutVideo Resolutions
 		= stylesheet_link_tag "application", :media => "all"
-		= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Open+Sans", :media => 'all'
+		= stylesheet_link_tag "stylesheet.css", :media => 'all'
 		= javascript_include_tag "application"
 		= csrf_meta_tags
 		= yield :open_graph
@@ -17,10 +17,12 @@
 	= yield :facebook_js
 	#wrap
 		.container
-			= yield
-			%hr
-			.row.footer
+			.row.header
 				.span12
-					.muted &copy; 2012-2013 SproutVideo
-					.pull-right
-						=link_to(image_tag('powered_by_sproutvideo.png', :alt => 'Video hosting powered by SproutVideo.com'), 'http://sproutvideo.com/?utm_source=contest_mini_site&utm_medium=powered_by_button&utm_campaign=new_years_resolution_contest')
+					=link_to(image_tag("logo.png"), root_path)
+					.pull-right.header-nav
+						=link_to('View all', submissions_url(:page => 1), :class => 'header-button')
+						=link_to('Leaderboard', leader_board_url, :class => 'header-button')
+						=link_to('Submit!', new_submission_path, :class => 'header-button submit')
+		.container
+			=yield
