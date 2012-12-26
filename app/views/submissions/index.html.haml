@@ -86,21 +86,22 @@
                 = number_with_delimiter leader.votes.count
                 .small= leader.votes.count == 1 ? "VOTE" : "VOTES"
               =link_to(image_tag('leader.png'),submission_path(leader))
-      %ul.leaderboard{:style => 'width: 49%; float: left;'}
-        -i = 3
-        -@leaders[3..5].each do |leader|
-          -i+=1
-          %li.leader
-            .position{:class => "position-#{i}"}
-              .txt=i
-            .details
-              .company= leader.email
-              .title= leader.title
-            .votes
-              .count
-                = number_with_delimiter leader.votes.count
-                .small= leader.votes.count == 1 ? "VOTE" : "VOTES"
-              =link_to(image_tag('leader.png'),submission_path(leader))
+      -if @leaders.length > 4
+        %ul.leaderboard{:style => 'width: 49%; float: left;'}
+          -i = 3
+          -@leaders[3..5].each do |leader|
+            -i+=1
+            %li.leader
+              .position{:class => "position-#{i}"}
+                .txt=i
+              .details
+                .company= leader.email
+                .title= leader.title
+              .votes
+                .count
+                  = number_with_delimiter leader.votes.count
+                  .small= leader.votes.count == 1 ? "VOTE" : "VOTES"
+                =link_to(image_tag('leader.png'),submission_path(leader))
 
 
   :javascript
