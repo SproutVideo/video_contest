@@ -36,7 +36,8 @@ jQuery(document).ready(function($) {
     }
     function hasFileError(f) {
         if(f.error) return f.error;
-        if (!(extensions_regex.test(f.type) || extensions_regex.test(f.name))) {
+        var extensions = f.name.split('.')
+        if (!extensions_regex.test("." + extensions[extensions.length-1].toLowerCase())) {
             return 'We do not currently accept this type of file for upload.';
         }
         if (f.size > 5368709120) {
