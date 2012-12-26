@@ -254,7 +254,7 @@ text-align: center;}
 .upload-button-box {
   position: relative;
   margin: 0 auto 15px;
-  overflow; hidden;
+  overflow: hidden;
   height: 56px;
   padding-top: 33px;
  }
