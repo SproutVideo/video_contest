@@ -15,6 +15,8 @@ class SubmissionsController < ApplicationController
     @submission = Submission.find_by_uid(params[:id])
     if cookies['last_voted']
       @voted_today = (Time.now.utc.to_date - cookies['last_voted'].to_date).to_i < 1
+    else
+      @voted_today = false
     end
     @vote = Vote.new
     respond_to do |format|

@@ -20,7 +20,8 @@ class Submission < ActiveRecord::Base
 
   def place
     votes = Vote.count(:group => 'submission_id').sort{|a,b| b[1]<=>a[1]}.collect{|ids|ids[0]}
-    (votes.index(id)+1).ordinalize
+    place = votes.index(id)
+    place.nil? ? "?" : (place+1).ordinalize
   end
 
   def send_to_sproutvideo
