@@ -224,7 +224,29 @@ font-weight: bold;
 .votes {
   text-align:center;
   margin-left: -140px;
-}    
+}
+.score .votes {
+  margin-left: 0;
+  float: right;
+}
+.divider {
+  width: 1px;
+  position: absolute;
+  border-left: 1px solid #FFF;
+  left: 50%;
+  top: 16px;
+  height: 65px;
+}
+.share {
+  margin-top: 30px;
+}
+.share .tweet {
+  margin-top:-13px;
+}
+.share .like {
+  float: left;
+  margin: -26px 0px 0px 105px;
+}
 
     .drop-target {
   padding-top: 50px;
@@ -483,6 +505,11 @@ li.leader .details .company {
   font-family: "Proxima Nova";
   font-size: 24px;
   font-weight: bold;
+  white-space: nowrap;
+  width: 100%;                   
+  overflow: hidden;              /* "overflow" value must be different from "visible" */
+  word-wrap: break-word;
+  text-overflow:    ellipsis;
 }
 li.leader .details .title {
   color: #a5a5a5; /* text color */
@@ -490,6 +517,11 @@ li.leader .details .title {
   font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
+  white-space: nowrap;
+  width: 100%;                   
+  overflow: hidden;              /* "overflow" value must be different from "visible" */
+ 
+  text-overflow:    ellipsis;
 }
 li.leader .votes {
   background-color: #cfebfd;
@@ -519,6 +551,7 @@ li.leader .votes a {
   float: right;
   margin-top: 12px;
   margin-right: 12px;
+  
 }
 .video-details {
 -moz-border-radius: 4px;
@@ -552,6 +585,8 @@ font-family: "Proxima Nova";
 font-size: 42px;
 font-weight: bold;
 text-shadow: 0 -1px 0 rgba(0,0,0,.25); /* drop shadow */
+overflow: hidden;
+position : relative;
 }
 .score .small {
   color: #fff; /* text color */
@@ -648,6 +683,10 @@ width: 100%;
     position: absolute;
     top: 50%;
     z-index: 1;
+}
+.place {
+  float: left;
+  text-align: center;
 }
 @font-face {
     font-family: 'proxima_nova_rgregular';

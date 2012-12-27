@@ -17,7 +17,7 @@
 				%p
 					%b.state Transferring your video to SproutVideo...
 				.row
-					.span10
+					.span6
 						.progress.progress-striped.active.progress-warning
 							.bar{:style=>"width: 100%;"}
 					.span1 
@@ -53,10 +53,12 @@
 			.header-bar
 				%span Sharing
 			.share
-				%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"I just voted for #{@submission.title} to win a free year of SproutVideo. You should too! #SproutResolutions", :"data-url" =>"#{@submission.short_url}"}Tweet
-				:javascript
-					!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-				.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
+				.tweet
+					%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"I just voted for #{@submission.title} to win a free year of SproutVideo. You should too! #SproutResolutions", :"data-url" =>"#{@submission.short_url}"}Tweet
+					:javascript
+						!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+				.like
+					.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
 			.header-bar
 				%span Comments
 			.comments
@@ -79,15 +81,15 @@
 		.video-details
 			.score
 				.place
-					10
-					%sup th
+					= @submission.place
 					.small
-						place
+						PLACE
+				.divider
 				.votes
-					25
+					= @submission.votes.count
 					.small
-						votes
-			-unless @voted_today
+						= @submission.votes.count == 1 ? "VOTE" : "VOTES"
+			-unless !!@voted_today
 				.vote_form
 					=form_for @vote, :remote => true do |f|
 						=f.hidden_field :submission_id, :value => @submission.id
@@ -96,6 +98,7 @@
 					%button.vote-btn{:disabled => true}
 						Thanks for voting!
 			- else
+				%br
 				%p Thanks for voting today. Check back tomorrow to vote again!
 			%hr
 			%p= @submission.description

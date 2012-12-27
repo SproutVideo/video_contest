@@ -18,6 +18,11 @@ class Submission < ActiveRecord::Base
     update_attribute(:short_url, url)
   end
 
+  def place
+    votes = Vote.count(:group => 'submission_id').sort{|a,b| b[1]<=>a[1]}.collect{|ids|ids[0]}
+    (votes.index(id)+1).ordinalize
+  end
+
   def send_to_sproutvideo
     return if !sproutvideo_id.nil?
     create_short_url
