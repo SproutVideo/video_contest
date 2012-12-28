@@ -25,3 +25,18 @@
 						=link_to('Submit!', new_submission_path, :class => 'header-button submit')
 		.container
 			=yield
+			.row-fluid.footer
+				.span12{:style=>"font-size: 16px; font-weight: bold"}
+					&copy; 2013 SproutVideo
+					.pull-right
+						=link_to('About', about_path)
+						|
+						=link_to('Rules', rules_path)
+						|
+						=link_to('Submissions', submissions_path(:page => 1))
+						|
+						=link_to('Leader Board', leader_board_path)
+						|
+						=link_to('Submit', new_submission_path)
+						|
+						=link_to('Powered by SproutVideo', 'http://sproutvideo.com')

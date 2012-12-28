@@ -10,11 +10,11 @@
           -subs.each do |submission|
             %li.span3
               %a.play{:href => submission_path(submission)}
-                %span.play
-                  .votes
-                    = number_with_delimiter submission.votes.count
-                    .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
                 .img-wrap
+                  %span.play
+                    .votes
+                      = number_with_delimiter submission.votes.count
+                      .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
                   =image_tag(submission.sproutvideo_poster_frame_url)
               %p.title= submission.title
               %hr
@@ -44,7 +44,7 @@
                     %b win a free year
                     of SproutVideo services!
                   =link_to('Submit Yours Now!', new_submission_path, :class => 'submit-btn')
-                  =link_to('What is this?', new_submission_path, :class => 'what-btn')
+                  =link_to('What is this?', about_path, :class => 'what-btn')
   .row-fluid
     .span12
       .header-text
@@ -53,12 +53,12 @@
       %ul.submissions.thumbnails
         -@submissions.each do |submission|
           %li.span3
-            %a.play{:href => submission_path(submission)}
-              %span.play
-                .votes
-                  = number_with_delimiter submission.votes.count
-                  .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
+            %a.play{:href => submission_path(submission)}                
               .img-wrap
+                %span.play
+                  .votes
+                    = number_with_delimiter submission.votes.count
+                    .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
                 =image_tag(submission.sproutvideo_poster_frame_url)
             %p.title= submission.title
             %hr

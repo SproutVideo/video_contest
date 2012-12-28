@@ -6,6 +6,8 @@ VideoContest::Application.routes.draw do
   end
   resources :votes
   match 'leader_board' => 'submissions#leader_board'
+  match 'about' => 'submissions#about'
+  match 'rules' => 'submissions#rules'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

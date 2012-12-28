@@ -12,6 +12,12 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def about    
+  end
+
+  def rules
+  end
+
   def show
     @submission = Submission.find_by_uid(params[:id])
     if cookies['last_voted']
