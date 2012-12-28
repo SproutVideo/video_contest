@@ -36,14 +36,14 @@ border-radius: 4px; /* border radius */
 background-clip: padding-box; /* prevents bg color from leaking outside the border */
 background-color: #fff; /* layer fill content */
 color: #0d8fe1; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 20px;
 font-weight: bold;
 padding: 10px;
  }
  .header-text {
   color: #0e8fe1; /* text color */
-  font-family: "Proxima Nova";
+  font-family: "Proxima Nova", "Helvetica", "sans-serif";
   font-size: 30px;
   font-weight: bold;
  }
@@ -74,7 +74,7 @@ border-radius: 5px; /* border radius */
 background-clip: padding-box; /* prevents bg color from leaking outside the border */
 background-color: #0d8fe1; /* layer fill content */
 color: #fefffe; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 20px;
 font-weight: bold;
 
@@ -98,7 +98,7 @@ background-image: -o-linear-gradient(bottom, #0e86d3 0%, #0d8fe1 100%); /* gradi
 background-image: -webkit-linear-gradient(bottom, #0e86d3 0%, #0d8fe1 100%); /* gradient overlay */
 background-image: linear-gradient(bottom, #0e86d3 0%, #0d8fe1 100%); /* gradient overlay */
 color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 22px;
 font-weight: bold;
 text-shadow: 0 1px 0 rgba(0,0,0,.25); /* drop shadow */
@@ -140,7 +140,7 @@ background-image: -o-linear-gradient(bottom, #424242 0%, #4e4e4e 100%); /* gradi
 background-image: -webkit-linear-gradient(bottom, #424242 0%, #4e4e4e 100%); /* gradient overlay */
 background-image: linear-gradient(bottom, #424242 0%, #4e4e4e 100%); /* gradient overlay */
 color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 22px;
 font-weight: bold;
 text-shadow: 0 1px 0 rgba(0,0,0,.25); /* drop shadow */
@@ -192,11 +192,25 @@ background-image: linear-gradient(bottom, #4e4e4e 0%, #424242 100%); /* gradient
 }
 a.play {
 	position: relative;
+  /* Firefox */
+display:-moz-box;
+-moz-box-pack:center;
+-moz-box-align:center;
+
+/* Safari and Chrome */
+display:-webkit-box;
+-webkit-box-pack:center;
+-webkit-box-align:center;
+
+/* W3C */
+display:box;
+box-pack:center;
+box-align:center
 
 }
 a.play .img-wrap {
   overflow: hidden;
-  height: 160px;
+  max-height: 152px;
 }
 a.play img {
     border-top-left-radius: 4px;
@@ -210,17 +224,18 @@ a.play span.play {
     color: #fff; /* text color */
     padding: 25px;
     -webkit-font-smoothing: antialiased;
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 30px;
 font-weight: bold;
     background: url(/assets/play-bg.png) no-repeat 0 0;
     display: block;
     height: 80px;
-    left: 50%;
-    margin: 30px 0 0 40px;
     position: absolute;
+    width: 180px; 
     top: 50%;
-    width: 180px; }
+    left: 50%;
+    margin: -40px 0 0 -90px;
+  }
 .votes {
   text-align:center;
   margin-left: -140px;
@@ -380,7 +395,7 @@ background-clip: padding-box; /* prevents bg color from leaking outside the bord
     }
     .carousel-caption h1 {
       color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 44px;
 font-weight: bold;
 text-shadow: 0 -1px 0 rgba(0,0,0,.4); /* drop shadow */
@@ -389,7 +404,7 @@ text-shadow: 0 -1px 0 rgba(0,0,0,.4); /* drop shadow */
     .carousel-caption .lead {
       
 color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 20px;
 text-shadow: 0 -1px 0 rgba(0,0,0,.4); /* drop shadow */
 -webkit-font-smoothing: antialiased;
@@ -405,17 +420,14 @@ ul.submissions {
 }
 .view-all {
   color: #0d8fe1; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 16px;
 font-weight: bold;
 
 }
 ul.submissions li {
-  width: 277px;
   background-color: #d0ebfd;;
   list-style: none;
-  float: left;
-  margin-right: 20px;
   overflow: hidden;
   border-radius: 4px;
   -webkit-font-smoothing: antialiased;
@@ -425,14 +437,14 @@ ul.submissions li {
 }
 ul.submissions li p.desc {
   color: #0d8fe1; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 16px;
 font-weight: bold;
 padding: 10px 5px 0;
 }
 ul.submissions li p.title {
   color: #353535; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 18px;
 font-weight: bold;
 padding: 10px 5px 0;
@@ -444,7 +456,6 @@ ul.submissions li hr {
   margin: 0 auto;
   height: 1px;
 }
-ul.submissions > :nth-child(4n+4) {margin-right: 0 !important; }
 ul.leaderboard {
   margin: 10px 0;
 }
@@ -474,7 +485,7 @@ background-color: #0d8fe1;; /* layer fill content */
 width: 50px;
 height: 50px;
 color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 30px;
 font-weight: bold;
 position: relative;
@@ -502,7 +513,7 @@ li.leader .details {
 }
 li.leader .details .company {
   color: #000; /* text color */
-  font-family: "Proxima Nova";
+  font-family: "Proxima Nova", "Helvetica", "sans-serif";
   font-size: 24px;
   font-weight: bold;
   white-space: nowrap;
@@ -513,7 +524,7 @@ li.leader .details .company {
 }
 li.leader .details .title {
   color: #a5a5a5; /* text color */
-  font-family: "Proxima Nova";
+  font-family: "Proxima Nova", "Helvetica", "sans-serif";
   font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
@@ -533,7 +544,7 @@ li.leader .votes {
 
 li.leader .votes .count {
   color: #0d8fe1; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 30px;
 font-weight: bold;
 margin-top: 25px;
@@ -543,7 +554,7 @@ float: left;
 }
 li.leader .votes .count .small {
   color: #0d8fe1; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 14px;
 font-weight: bold;
 }
@@ -551,7 +562,7 @@ li.leader .votes a {
   float: right;
   margin-top: 12px;
   margin-right: 12px;
-  
+
 }
 .video-details {
 -moz-border-radius: 4px;
@@ -566,7 +577,7 @@ padding: 22px;
 }
 .video-details p {
   color: #000; /* text color */
-  font-family: "Proxima Nova";
+  font-family: "Proxima Nova", "Helvetica", "sans-serif";
   font-size: 18px;
   font-weight: bold;
 
@@ -581,7 +592,7 @@ background-clip: padding-box; /* prevents bg color from leaking outside the bord
 background-color: #0d8fe1; /* layer fill content */
 padding: 30px;
 color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 42px;
 font-weight: bold;
 text-shadow: 0 -1px 0 rgba(0,0,0,.25); /* drop shadow */
@@ -590,7 +601,7 @@ position : relative;
 }
 .score .small {
   color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 16px;
 font-weight: bold;
 text-shadow: 0 -1px 0 rgba(0,0,0,.25); /* drop shadow */
@@ -613,7 +624,7 @@ background-image: -o-linear-gradient(bottom, #4ba740 0%, #53b747 100%); /* gradi
 background-image: -webkit-linear-gradient(bottom, #4ba740 0%, #53b747 100%); /* gradient overlay */
 background-image: linear-gradient(bottom, #4ba740 0%, #53b747 100%); /* gradient overlay */
 color: #fff; /* text color */
-font-family: "Proxima Nova";
+font-family: "Proxima Nova", "Helvetica", "sans-serif";
 font-size: 24px;
 font-weight: bold;
 text-shadow: 0 1px 0 rgba(0,0,0,.35); /* drop shadow */
@@ -662,7 +673,7 @@ width: 100%;
 
 .header-bar {
   color: #0d8fe1; /* text color */
-  font-family: "Proxima Nova";
+  font-family: "Proxima Nova", "Helvetica", "sans-serif";
   font-size: 24px;
   font-weight: bold;
   position: relative;

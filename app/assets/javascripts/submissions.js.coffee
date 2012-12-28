@@ -5,7 +5,7 @@ window.Application ||= {}
 Application.pollForProgress = (uid) ->
 	$.getJSON '/submissions/' + uid, (data) ->
 		if data.state == 'deployed'
-			window.location.href = '/submissions/' + uid
+			window.location.href = '/submissions/' + uid + "?new_entry=true"
 		else
 			if data.state == 'processing'
 				$('.percent').html(data.percent)

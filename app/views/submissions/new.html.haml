@@ -20,6 +20,11 @@
                             = f.text_field :email, :class => 'span8'
                             .help-block So we know who to contact if you win!
                     .control-group
+                        %label.control-label Company Name:
+                        .controls
+                            = f.text_field :company_name, :class => 'span8'
+                            .help-block The name of your company.
+                    .control-group
                         %label.control-label Title:
                         .controls
                             = f.text_field :title, :class => 'span8'

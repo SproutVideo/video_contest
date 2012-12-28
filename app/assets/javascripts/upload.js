@@ -186,6 +186,15 @@ jQuery(document).ready(function($) {
             $('#submission_email').parent().parent().removeClass('error');
             $('#submission_email').next().html('So we know who to contact if you win!')
         }
+        //company_name
+        if($.trim($('#submission_company_name').val()) == "") {
+            $('#submission_company_name').parent().parent().addClass('error');
+            $('#submission_company_name').next().html('Please enter a company  name.')
+            valid = false;
+        } else {
+            $('#submission_company_name').parent().parent().removeClass('error');
+            $('#submission_company_name').next().html('The name of your company.')
+        }
 
         //title
         if($.trim($('#submission_title').val()) == "") {

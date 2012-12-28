@@ -7,7 +7,7 @@
 			%br
 			%span.sub
 				by
-				= @submission.email
+				= @submission.company_name
 		%br
 .row
 	.span8
@@ -102,4 +102,22 @@
 				%p Thanks for voting today. Check back tomorrow to vote again!
 			%hr
 			%p= @submission.description
-	
+-if @new_entry
+	.modal.hide.fade#thanks_modal
+		.modal-header
+			%button.close(type="button" data-dismiss="modal" aria-hidden="true") &times;
+			%h3 Thanks!
+		.modal-body
+			%p Thank you for submitting your video entry to the #SproutResolutions contest!
+			%p Please share your entry to get more votes and make sure to use the #SproutResolutions hash tag!
+			.share
+				.tweet
+					%a{:href=>"https://twitter.com/share", :class=>"twitter-share-button", :"data-text"=>"Please vote for our video entry to the #SproutResolutions contest!", :"data-url" =>"#{@submission.short_url}"}Tweet
+					:javascript
+						!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+				.like
+					.fb-like{:"data-href"=>"#{submission_url(@submission)}", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
+		.modal-footer
+			%a.btn(href="#" data-dismiss="modal" aria-hidden="true") Close	
+	:javascript
+		$('#thanks_modal').modal().show()

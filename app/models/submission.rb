@@ -1,6 +1,6 @@
 class Submission < ActiveRecord::Base
   attr_accessible :title, :description, :video, :email, :ip_address, :user_agent
-  validates_presence_of :email, :title, :description, :video
+  validates_presence_of :email, :title, :description, :video, :company_name
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
   has_attached_file :video

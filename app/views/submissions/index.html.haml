@@ -1,23 +1,24 @@
 -if params[:page]
-  .row
+  .row-fluid
     .span12
       .header-text
         View all the resolutions!
         %br
         %span.sub Browse all of the 2013 resolutions companies are making!
-      %ul.submissions
-        -@submissions.each do |submission|
-          %li
-            %a.play{:href => submission_path(submission)}
-              %span.play
-                .votes
-                  = number_with_delimiter submission.votes.count
-                  .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
-              .img-wrap
-                =image_tag(submission.sproutvideo_poster_frame_url)
-            %p.title= submission.title
-            %hr
-            %p.desc= truncate(submission.description, :length => 165)
+      -@submissions.in_groups_of(4, false) do |subs|
+        %ul.submissions.thumbnails
+          -subs.each do |submission|
+            %li.span3
+              %a.play{:href => submission_path(submission)}
+                %span.play
+                  .votes
+                    = number_with_delimiter submission.votes.count
+                    .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
+                .img-wrap
+                  =image_tag(submission.sproutvideo_poster_frame_url)
+              %p.title= submission.title
+              %hr
+              %p.desc= truncate(submission.description, :length => 165)
       = paginate @submissions
 
 -else
@@ -43,14 +44,14 @@
                     of SproutVideo services!
                   =link_to('Submit Yours Now!', new_submission_path, :class => 'submit-btn')
                   =link_to('What is this?', new_submission_path, :class => 'what-btn')
-  .row
+  .row-fluid
     .span12
       .header-text
         Latest Submissions
         %span.sub Tons of businesses are declaring their resolutions!
-      %ul.submissions
+      %ul.submissions.thumbnails
         -@submissions.each do |submission|
-          %li
+          %li.span3
             %a.play{:href => submission_path(submission)}
               %span.play
                 .votes
@@ -63,7 +64,7 @@
             %p.desc= truncate(submission.description, :length => 165)
       .pull-right
         =link_to('View all', submissions_path(:page => 1), :class => 'view-all')
-  .row
+  .row-fluid
     .span12
       .header-text.leaderboard
         Leaderboard
@@ -71,7 +72,9 @@
           These businesses are in the running for
           %b a free year
           of SproutVideo!
-      %ul.leaderboard{:style => 'width: 49%; float: left; margin-right: 10px'}
+  .row-fluid
+    .span6
+      %ul.leaderboard
         -i = 0
         -@leaders[0..2].each do |leader|
           -i+=1
@@ -79,15 +82,16 @@
             .position{:class => "position-#{i}"}
               .txt=i
             .details
-              .company= leader.email
-              .title= leader.title
+              .company{:"data-company_name" => leader.company_name}= leader.company_name
+              .title{:"data-title" => leader.title}= leader.title
             .votes
               .count
                 = number_with_delimiter leader.votes.count
                 .small= leader.votes.count == 1 ? "VOTE" : "VOTES"
               =link_to(image_tag('leader.png'),submission_path(leader))
-      -if @leaders.length > 4
-        %ul.leaderboard{:style => 'width: 49%; float: left;'}
+    .span6
+      -if @leaders.length > 3
+        %ul.leaderboard
           -i = 3
           -@leaders[3..5].each do |leader|
             -i+=1
@@ -95,8 +99,8 @@
               .position{:class => "position-#{i}"}
                 .txt=i
               .details
-                .company= leader.email
-                .title= leader.title
+                .company{:"data-company_name" => leader.company_name}= leader.company_name
+                .title{:"data-title" => leader.title}= leader.title
               .votes
                 .count
                   = number_with_delimiter leader.votes.count
@@ -107,3 +111,19 @@
   :javascript
     if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1)
       $('img.background').attr('src', '/assets/background-safari.jpg')
+    function resize() {
+      $('.leader').each(function(){
+        var name = $(this).find('.details .company').data('company_name');
+        width = $(this).width();
+        $(this).find('.company').html(Application.fitStringToWidth(name, width-280, 'company'))
+        var title = $(this).find('.details .title').data('title');
+        $(this).find('.title').html(Application.fitStringToWidth(title, width-280, 'company'))
+      })
+    }
+    
+    $(document).ready(function(){
+      $(window).resize(function(){
+        resize();
+      });
+      resize();
+    });

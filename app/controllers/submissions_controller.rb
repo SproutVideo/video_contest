@@ -23,6 +23,9 @@ class SubmissionsController < ApplicationController
       format.html {}
       format.json {render json: {state: @submission.video_state, percent: "#{@submission.encoding_progress}%"}}
     end
+    
+    @new_entry = !!params[:new_entry]
+    
   end
 
   def new
