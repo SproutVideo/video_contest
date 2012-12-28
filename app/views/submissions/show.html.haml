@@ -93,7 +93,7 @@
 				.vote_form
 					=form_for @vote, :remote => true do |f|
 						=f.hidden_field :submission_id, :value => @submission.id
-						=f.submit 'Vote for this submission!', :class => 'vote-btn'
+						=f.submit 'Vote for this video!', :class => 'vote-btn'
 				.vote_success{:style => 'display:none;'}
 					%button.vote-btn{:disabled => true}
 						Thanks for voting!

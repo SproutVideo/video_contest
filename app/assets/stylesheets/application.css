@@ -516,11 +516,6 @@ li.leader .details .company {
   font-family: "Proxima Nova", "Helvetica", "sans-serif";
   font-size: 24px;
   font-weight: bold;
-  white-space: nowrap;
-  width: 100%;                   
-  overflow: hidden;              /* "overflow" value must be different from "visible" */
-  word-wrap: break-word;
-  text-overflow:    ellipsis;
 }
 li.leader .details .title {
   color: #a5a5a5; /* text color */
@@ -528,11 +523,6 @@ li.leader .details .title {
   font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
-  white-space: nowrap;
-  width: 100%;                   
-  overflow: hidden;              /* "overflow" value must be different from "visible" */
- 
-  text-overflow:    ellipsis;
 }
 li.leader .votes {
   background-color: #cfebfd;
@@ -631,6 +621,9 @@ text-shadow: 0 1px 0 rgba(0,0,0,.35); /* drop shadow */
 text-align: center;
 padding: 30px;
 margin-top: 10px;
+width: 100% !important;
+white-space: nowrap;
+white-space: normal;
 }
 .vote-btn:active{
   border: 1px solid #3b8333; /* stroke */

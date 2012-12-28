@@ -1,5 +1,6 @@
 class SubmissionsController < ApplicationController
   def index
+    @mobile = request.user_agent =~ /Mobile|webOS/
     if params[:page]
       @submissions = Submission.where('video_state = "deployed"').order('id DESC').page(params[:page])
     else
