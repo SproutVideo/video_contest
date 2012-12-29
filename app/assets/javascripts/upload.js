@@ -124,6 +124,11 @@ jQuery(document).ready(function($) {
             $('#submission_title').next().html('Title ' + response.title);
         }
 
+        if(response.company_name) {
+            $('#submission_company_name').parent().parent().addClass('error');
+            $('#submission_company_name').next().html('Company Name ' + response.company_name);   
+        }
+
         if(response.description) {
             $('#submission_description').parent().parent().addClass('error');
             $('#submission_description').next().html('Description ' + response.description)
