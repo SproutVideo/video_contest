@@ -13,7 +13,9 @@
 		= csrf_meta_tags
 		= yield :open_graph
 %body
-	= yield :facebook_js
+	#fb-root
+		:javascript
+			(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=153473816914";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
 	#wrap
 		.container
 			.row.header
@@ -27,7 +29,13 @@
 			=yield
 			.row-fluid.footer
 				.span12{:style=>"font-size: 16px; font-weight: bold"}
-					&copy; 2013 SproutVideo
+					.pull-left &copy; 2013 SproutVideo
+					.share{:style => 'display:inline-block;margin-top:12px;margin-left:12px'}
+						.tweet
+							<a href="https://twitter.com/share" class="twitter-share-button" data-via="twitterapi" data-lang="en">Tweet</a>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+						.like
+							.fb-like{:"data-href"=>"http://resolutions.sproutvideo.com", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
 					.pull-right
 						=link_to('About', about_path)
 						|
