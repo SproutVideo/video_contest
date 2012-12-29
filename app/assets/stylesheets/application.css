@@ -697,6 +697,10 @@ width: 100%;
   float: left;
   text-align: center;
 }
+.score .place .small, .score .votes .small {
+  margin-top: 10px;
+}
+
 @font-face {
     font-family: 'proxima_nova_rgregular';
     src: url('proximanova-regular-webfont.eot');
