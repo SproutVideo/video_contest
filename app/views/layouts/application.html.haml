@@ -12,39 +12,49 @@
 		= javascript_include_tag "application"
 		= csrf_meta_tags
 		= yield :open_graph
-%body
-	#fb-root
+	%body
+		#fb-root
+			:javascript
+				(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=153473816914";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+		#wrap
+			.container
+				.row.header
+					.span12
+						=link_to(image_tag("logo.png"), root_path)
+						.pull-right.header-nav
+							=link_to('View all', submissions_url(:page => 1), :class => 'header-button')
+							=link_to('Leaderboard', leader_board_url, :class => 'header-button')
+							=link_to('Submit!', new_submission_path, :class => 'header-button submit')
+			.container
+				=yield
+				.row-fluid.footer
+					.span12{:style=>"font-size: 16px; font-weight: bold"}
+						.pull-left &copy; 2013 SproutVideo
+						.share{:style => 'display:inline-block;margin-top:12px;margin-left:12px'}
+							.tweet
+								<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="http://resolutions.sproutvideo.com" data-text="#SproutResolutions">Tweet</a>
+								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+							.like
+								.fb-like{:"data-href"=>"http://resolutions.sproutvideo.com", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
+						.pull-right
+							=link_to('About', about_path)
+							|
+							=link_to('Rules', rules_path)
+							|
+							=link_to('Submissions', submissions_path(:page => 1))
+							|
+							=link_to('Leader Board', leader_board_path)
+							|
+							=link_to('Submit', new_submission_path)
+							|
+							=link_to('Powered by SproutVideo', 'http://sproutvideo.com')
 		:javascript
-			(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=153473816914";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
-	#wrap
-		.container
-			.row.header
-				.span12
-					=link_to(image_tag("logo.png"), root_path)
-					.pull-right.header-nav
-						=link_to('View all', submissions_url(:page => 1), :class => 'header-button')
-						=link_to('Leaderboard', leader_board_url, :class => 'header-button')
-						=link_to('Submit!', new_submission_path, :class => 'header-button submit')
-		.container
-			=yield
-			.row-fluid.footer
-				.span12{:style=>"font-size: 16px; font-weight: bold"}
-					.pull-left &copy; 2013 SproutVideo
-					.share{:style => 'display:inline-block;margin-top:12px;margin-left:12px'}
-						.tweet
-							<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="http://resolutions.sproutvideo.com" data-text="#SproutResolutions">Tweet</a>
-							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-						.like
-							.fb-like{:"data-href"=>"http://resolutions.sproutvideo.com", :"data-send"=>"true", :"data-layout"=>"button_count", :"data-width"=>"450", :"data-show-faces"=>"false"}
-					.pull-right
-						=link_to('About', about_path)
-						|
-						=link_to('Rules', rules_path)
-						|
-						=link_to('Submissions', submissions_path(:page => 1))
-						|
-						=link_to('Leader Board', leader_board_path)
-						|
-						=link_to('Submit', new_submission_path)
-						|
-						=link_to('Powered by SproutVideo', 'http://sproutvideo.com')
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-17444662-7']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
