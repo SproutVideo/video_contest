@@ -5,21 +5,26 @@
         View all the resolutions!
         %br
         %span.sub Browse all of the 2013 resolutions companies are making!
-      -@submissions.in_groups_of(4, false) do |subs|
-        %ul.submissions.thumbnails
-          -subs.each do |submission|
-            %li.span3
-              %a.play{:href => submission_path(submission)}
-                .img-wrap
-                  %span.play
-                    .votes
-                      = number_with_delimiter submission.votes.count
-                      .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
-                  =image_tag(submission.sproutvideo_poster_frame_url)
-              %p.title= submission.title
-              %hr
-              %p.desc= truncate(submission.description, :length => 165)
-      = paginate @submissions
+      -if @submissions.count > 0
+        -@submissions.in_groups_of(4, false) do |subs|
+          %ul.submissions.thumbnails
+            -subs.each do |submission|
+              %li.span3
+                %a.play{:href => submission_path(submission)}
+                  .img-wrap
+                    %span.play
+                      .votes
+                        = number_with_delimiter submission.votes.count
+                        .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
+                    =image_tag(submission.sproutvideo_poster_frame_url)
+                %p.title= submission.title
+                %hr
+                %p.desc= truncate(submission.description, :length => 165)
+        = paginate @submissions
+      -else
+        %br
+        %h4 Check back soon for the latest #SproutResolutions
+        %br
 
 -else
   .row
@@ -50,21 +55,26 @@
       .header-text
         Latest Submissions
         %span.sub Tons of businesses are declaring their resolutions!
-      %ul.submissions.thumbnails
-        -@submissions.each do |submission|
-          %li.span3
-            %a.play{:href => submission_path(submission)}                
-              .img-wrap
-                %span.play
-                  .votes
-                    = number_with_delimiter submission.votes.count
-                    .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
-                =image_tag(submission.sproutvideo_poster_frame_url)
-            %p.title= submission.title
-            %hr
-            %p.desc= truncate(submission.description, :length => 165)
-      .pull-right
-        =link_to('View all', submissions_path(:page => 1), :class => 'view-all')
+      -if @submissions.length > 0
+        %ul.submissions.thumbnails
+          -@submissions.each do |submission|
+            %li.span3
+              %a.play{:href => submission_path(submission)}                
+                .img-wrap
+                  %span.play
+                    .votes
+                      = number_with_delimiter submission.votes.count
+                      .small= submission.votes.count == 1 ? "VOTE" : "VOTES"
+                  =image_tag(submission.sproutvideo_poster_frame_url)
+              %p.title= submission.title
+              %hr
+              %p.desc= truncate(submission.description, :length => 165)
+        .pull-right
+          =link_to('View all', submissions_path(:page => 1), :class => 'view-all')
+      -else
+        %br
+        %h4 Check back soon for the latest #SproutResolutions.
+        %br
   .row-fluid
     .span12
       .header-text.leaderboard
@@ -74,27 +84,11 @@
           %b a free year
           of SproutVideo!
   .row-fluid
-    .span6
-      %ul.leaderboard
-        -i = 0
-        -@leaders[0..2].each do |leader|
-          -i+=1
-          %li.leader
-            .position{:class => "position-#{i}"}
-              .txt=i
-            .details
-              .company{:"data-company_name" => leader.company_name}= leader.company_name
-              .title{:"data-title" => leader.title}= leader.title
-            .votes
-              .count
-                = number_with_delimiter leader.votes.count
-                .small= leader.votes.count == 1 ? "VOTE" : "VOTES"
-              =link_to(image_tag('leader.png'),submission_path(leader))
-    .span6
-      -if @leaders.length > 3
+    -if @leaders.length > 0
+      .span6
         %ul.leaderboard
-          -i = 3
-          -@leaders[3..5].each do |leader|
+          -i = 0
+          -@leaders[0..2].each do |leader|
             -i+=1
             %li.leader
               .position{:class => "position-#{i}"}
@@ -107,6 +101,26 @@
                   = number_with_delimiter leader.votes.count
                   .small= leader.votes.count == 1 ? "VOTE" : "VOTES"
                 =link_to(image_tag('leader.png'),submission_path(leader))
+      .span6
+        -if @leaders.length > 3
+          %ul.leaderboard
+            -i = 3
+            -@leaders[3..5].each do |leader|
+              -i+=1
+              %li.leader
+                .position{:class => "position-#{i}"}
+                  .txt=i
+                .details
+                  .company{:"data-company_name" => leader.company_name}= leader.company_name
+                  .title{:"data-title" => leader.title}= leader.title
+                .votes
+                  .count
+                    = number_with_delimiter leader.votes.count
+                    .small= leader.votes.count == 1 ? "VOTE" : "VOTES"
+                  =link_to(image_tag('leader.png'),submission_path(leader))
+    -else
+      %br
+      %h4 Check back soon!
 
 
   :javascript

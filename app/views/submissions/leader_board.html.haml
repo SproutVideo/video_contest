@@ -5,27 +5,11 @@
 			%br
 			%span.sub These are the companies in the running to win!
 .row-fluid
-	.span6
-		%ul.leaderboard
-			-i = 0
-			-@leaders[0..9].each do |leader|
-				-i+=1
-				%li.leader
-					.position{:class => "position-#{i}"}
-						.txt=i
-					.details
-						.company{:"data-company_name" => leader.company_name}= leader.company_name
-						.title{:"data-title" => leader.title}= leader.title
-					.votes
-						.count
-							= number_with_delimiter leader.votes.count
-							.small= leader.votes.count == 1 ? "VOTE" : "VOTES"
-						=link_to(image_tag('leader.png'),submission_path(leader))
-	.span6
-		-if @leaders.count > 9
+	-if @leaders.length > 0
+		.span6
 			%ul.leaderboard
-				-i = 10
-				-@leaders[10..19].each do |leader|
+				-i = 0
+				-@leaders[0..9].each do |leader|
 					-i+=1
 					%li.leader
 						.position{:class => "position-#{i}"}
@@ -38,7 +22,27 @@
 								= number_with_delimiter leader.votes.count
 								.small= leader.votes.count == 1 ? "VOTE" : "VOTES"
 							=link_to(image_tag('leader.png'),submission_path(leader))
-
+		.span6
+			-if @leaders.count > 9
+				%ul.leaderboard
+					-i = 10
+					-@leaders[10..19].each do |leader|
+						-i+=1
+						%li.leader
+							.position{:class => "position-#{i}"}
+								.txt=i
+							.details
+								.company{:"data-company_name" => leader.company_name}= leader.company_name
+								.title{:"data-title" => leader.title}= leader.title
+							.votes
+								.count
+									= number_with_delimiter leader.votes.count
+									.small= leader.votes.count == 1 ? "VOTE" : "VOTES"
+								=link_to(image_tag('leader.png'),submission_path(leader))
+	- else
+		%br
+		%h4 Check back soon!
+		%br
 :javascript
 	if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1)
 	  $('img.background').attr('src', '/assets/background-safari.jpg')
