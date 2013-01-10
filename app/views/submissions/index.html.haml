@@ -47,11 +47,14 @@
                     %br
                     next level in the new year! Have a goal? Make a video of your 2013 business resolutions and submit it to 
                     %b win a free year
-                    of SproutVideo services!
+                    of 
+                    =link_to('SproutVideo services', 'http://sproutvideo.com', :style => 'color:#FFF;text-decoration:underline', :target => '_blank')
+                    !
                   =link_to('Submit Yours Now!', new_submission_path, :class => 'submit-btn')
                   =link_to('What is this?', about_path, :class => 'what-btn')
   .row-fluid
     .span12
+      .divider{:style => 'clear:both'}
       .header-text
         Latest Submissions
         %span.sub Tons of businesses are declaring their resolutions!
